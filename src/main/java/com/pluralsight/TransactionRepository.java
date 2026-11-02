@@ -1,13 +1,15 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TransactionRepository {
-    public ArrayList<Transaction> readCSV(String filename) {
+    String filename;
+
+    public ArrayList<Transaction> load(String filename) {
+        this.filename = filename;
         ArrayList<Transaction> ledger = new ArrayList<Transaction>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
@@ -32,5 +34,21 @@ public class TransactionRepository {
             e.printStackTrace();
         }
         return ledger;
+    }
+
+    public void save(ArrayList<Transaction> ledger) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
+            String text;
+            bw.write("date|time|description|vendor|amount");
+            for (Transaction t : ledger) {
+                text = String.format("\n%s|%s|%s|%s|%f",
+                                     t.getDate(), t.getTime(), t.getDesc(), t.getVendor(), t.getAmount());
+                bw.write(text);
+            }
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
