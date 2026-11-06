@@ -77,8 +77,9 @@ src/
 1. Clone or download the project.
 2. Ensure a `transactions.csv` file exists in the project directory.
 3. Open the project in IntelliJ IDEA.
-4. Run the `AccountingLedgerApplication` class.
-5. Use the console to interact with the ledger.
+4. Choose either console control or window control by commenting out 
+5. Run the `AccountingLedgerApplication` class.
+6. Use the console to interact with the ledger.
 
 ### Example CSV Format
 
@@ -88,8 +89,8 @@ date|time|description|vendor|amount
 2026-11-03|12:15:00|Coffee|Starbucks|-6.25
 ```
 ## Future Improvements
-- Graphical User Interface (GUI) using Java Swing
-- Support for multiple ledger files
+- [x] Graphical User Interface (GUI) using Java Swing 
+- [ ] Support for multiple ledger files
     - Allow the user to select a CSV file when opening the application.
     - Allow the user to save ledger data to a user-specified file
 
@@ -104,3 +105,4 @@ Created as a Java accounting ledger application project to demonstrate:
 - Collection processing
 - User input validation
 - Transaction reporting and filtering
+- Swing fundamentals
