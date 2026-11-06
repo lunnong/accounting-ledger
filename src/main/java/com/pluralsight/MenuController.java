@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuController {
-    private Scanner scanner;
-    private TransactionService service;
+    private final Scanner scanner;
+    private final TransactionService service;
+
     public MenuController(TransactionService service) {
         this.scanner = new Scanner(System.in);
         this.service = service;
@@ -22,10 +23,12 @@ public class MenuController {
 
                 case "D":
                     addDeposit();
+                    pause("Deposit Added to Ledger!");
                     break;
 
                 case "P":
                     addPayment();
+                    pause("Payment Added to Ledger!");
                     break;
 
                 case "L":
@@ -39,7 +42,7 @@ public class MenuController {
                     break;
 
                 default:
-                    System.out.println("That isn't a valid choice!");
+                    pause("That isn't a valid choice!");
             }
 
         }
@@ -144,6 +147,7 @@ public class MenuController {
                     ==============================
                     """);
                     System.out.println(displayLedger(service.getLedger()));
+                    pause();
                     break;
                 case "D":
                     System.out.println("""
@@ -152,6 +156,7 @@ public class MenuController {
                     ==============================
                     """);
                     System.out.println(displayLedger(service.getDeposits()));
+                    pause();
                     break;
                 case "P":
                     System.out.println("""
@@ -160,15 +165,17 @@ public class MenuController {
                     ==============================
                     """);
                     System.out.println(displayLedger(service.getPayments()));
+                    pause();
                     break;
                 case "R":
                     processReportsMenu();
                     break;
                 case "H":
                     ledgerMenuRunning = false;
+                    pause("Returning to Previous Menu");
                     break;
                 default:
-                    System.out.println("That isn't a valid choice!");
+                    pause("That isn't a valid choice!");
             }
         }
     }
@@ -185,6 +192,7 @@ public class MenuController {
                     ==============================
                     """);
                     System.out.println(displayLedger(service.getMonthToDate()));
+                    pause();
                     break;
                 case "2":
                     System.out.println("""
@@ -193,6 +201,7 @@ public class MenuController {
                     ==============================
                     """);
                     System.out.println(displayLedger(service.getPreviousMonth()));
+                    pause();
                     break;
                 case "3":
                     System.out.println("""
@@ -201,6 +210,7 @@ public class MenuController {
                     ==============================
                     """);
                     System.out.println(displayLedger(service.getYearToDate()));
+                    pause();
                     break;
                 case "4":
                     System.out.println("""
@@ -209,6 +219,7 @@ public class MenuController {
                     ==============================
                     """);
                     System.out.println(displayLedger(service.getPreviousYear()));
+                    pause();
                     break;
                 case "5":
                     System.out.print("Enter the vendor name: ");
@@ -219,15 +230,17 @@ public class MenuController {
                     ==============================
                     """);
                     System.out.println(displayLedger(service.getByVendor(vendor)));
+                    pause();
                     break;
                 case "6":
                     customSearch();
+                    pause();
                     break;
                 case "0":
                     reportsMenuRunning = false;
                     break;
                 default:
-                    System.out.println("That isn't a valid choice!");
+                    pause("That isn't a valid choice!");
             }
         }
     }
@@ -235,10 +248,12 @@ public class MenuController {
     private void customSearch() {
         System.out.println("""
                 You will be prompted for:
+                
                 Start Date/End Date - Transactions between these dates (inclusive) will be shown.
-                Description - Transactions with this description will be shown.
-                Vendor - Transactions with this vendor will be shown.
-                Amount Range - Transactions between these amounts will be shown.
+                Description         - Transactions with this description will be shown.
+                Vendor              - Transactions with this vendor will be shown.
+                Amount Range        - Transactions between these amounts will be shown.
+                
                 If you do not want to filter based on a category, press enter without input.
                 Input is not case sensitive.
                 """);
@@ -317,6 +332,16 @@ public class MenuController {
             output.append(t);
         }
         return output.toString();
+    }
+
+    private void pause(String message) {
+        System.out.println(message);
+        pause();
+    }
+
+    private void pause() {
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
     }
 
 
