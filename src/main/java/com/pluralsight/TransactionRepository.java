@@ -42,7 +42,7 @@ public class TransactionRepository {
             String text;
             bw.write("date|time|description|vendor|amount");
             for (Transaction t : ledger) {
-                text = String.format("\n%s|%s|%s|%s|%f",
+                text = String.format("\n%s|%s|%s|%s|%.2f",
                                      t.getDate(), t.getTime(), t.getDesc(), t.getVendor(), t.getAmount());
                 bw.write(text);
             }

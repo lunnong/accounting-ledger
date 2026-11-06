@@ -1,9 +1,11 @@
 package com.pluralsight;
 
 public class AccountingLedgerApplication {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         TransactionRepository repository = new TransactionRepository();
-        TransactionService tController = new TransactionService(repository);
-        MenuController mController = new MenuController(tController);
+        TransactionService transactionService = new TransactionService(repository);
+        MenuController menuController = new MenuController(transactionService);
+
+        menuController.run();
     }
 }

@@ -19,7 +19,7 @@ public class Transaction {
     }
 
     public Transaction(String desc, String vendor, double amount) {
-        this(LocalDate.now(), LocalTime.now(), desc, vendor, amount);
+        this(LocalDate.now(), LocalTime.now().withNano(0), desc, vendor, amount);
     }
 
     public Transaction() {
@@ -60,12 +60,10 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "date=" + date +
-                ", time=" + time +
-                ", desc='" + desc + '\'' +
-                ", vendor='" + vendor + '\'' +
-                ", amount=" + amount +
-                '}';
+        return          date +
+                " | " + time +
+                " | " + desc +
+                " | " + vendor +
+                " | " + String.format("%.2f", amount);
     }
 }
